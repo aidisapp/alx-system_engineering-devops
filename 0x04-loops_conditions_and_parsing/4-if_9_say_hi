@@ -11,6 +11,5 @@ do
 		echo "Hi"
 	fi
   	echo "Best School"
-
 	count=$((a+1))
 done
