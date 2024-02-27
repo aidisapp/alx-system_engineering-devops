@@ -7,6 +7,6 @@
 # user id
 # Home directory path for the user
 
-while read -r passwd; do
-    echo "$passwd" | cut -d ":" -f1,3,6
-done < /etc/passwd
+while read -r out; do
+    echo "$out" | cut -d ':' -f1,3,6
+done </etc/passwd
