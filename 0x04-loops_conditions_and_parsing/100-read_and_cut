@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
-# Bash script that displays the content of the file /etc/passwd.
-# Your script will only display:
-# username
-# user id
-# Home directory path for the user
-while read -r out; do
-	echo "$out" | cut -d ':' -f 1,3,6
-done</etc/passwd
+# This script is to enable one 
+# feel that fuzz, bizz ;-)
+i=0
+while [ $((i++)) -lt 100 ]; do
+	if [ $((i % 15)) -eq 0 ]; then
+		echo "FizzBuzz"
+	elif [ $((i % 5)) -eq 0 ]; then
+		echo "Buzz"
+	elif [ $((i % 3)) -eq 0 ]; then
+		echo "Fizz"
+	else
+		echo $i
+	fi
+done
