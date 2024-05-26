@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Script that configures Nginx to run as the 'nginx' user and listen on port 8080.
 
 # Update the Nginx configuration to run as the 'nginx' user
