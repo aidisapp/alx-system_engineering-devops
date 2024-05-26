@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # We would need to check if the script
 # receives exactly one argument
