@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# We would need to check if the script
+# receives exactly one argument
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <username>"
+  exit 1
+fi
+
+# We would need to store the argument in a variable
+USERNAME=$1
+
+# Then we should use su to switch to the
+# specified user and run whoami
+su -c whoami $USERNAME
