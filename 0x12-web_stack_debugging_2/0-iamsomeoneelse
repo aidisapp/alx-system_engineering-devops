@@ -10,6 +10,9 @@ fi
 # We would need to store the argument in a variable
 USERNAME=$1
 
-# Then we should use su to switch to the
+# Then we should use sudo to switch to the
 # specified user and run whoami
-su -c whoami $USERNAME
+if ! sudo -u "$USERNAME" whoami; then
+  echo "Failed to run command as $USERNAME" >&2
+  exit 1
+fi
