@@ -16,36 +16,20 @@ import sys
 API_ENDPOINT = "https://jsonplaceholder.typicode.com"
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        user_id = sys.argv[1]
-        user_url = f"{API_ENDPOINT}/users/{user_id}"
-        user_response = requests.get(user_url)
-        """ANYTHING"""
-        user_data = user_response.json()
-        user_name = user_data.get('username')
+    USER = argv[1]
+    USERNAME = API_ENDPOINT + '/users/' + USER
+    res = requests.get(USERNAME)
+    """ANYTHING"""
+    user_name = res.json().get('username')
+    TODO_URI = USERNAME + '/todos'
+    res = requests.get(TODO_URI)
+    tasks = res.json()
 
-        todos_url = f"{user_url}/todos"
-        todos_response = requests.get(todos_url)
-        tasks = todos_response.json()
-
-        # Print the completed tasks to the console
-        completed_tasks = [task for task in tasks if task.get('completed')]
-        print(f"Employee {user_data.get(
-                        'name')} is done with tasks({len(
-                                    completed_tasks)}/{len(tasks)}): ")
-        for task in completed_tasks:
-            print(f"\t {task.get('title')}")
-
-        # Write tasks to a CSV file
-        csv_filename = f"{user_id}.csv"
-        with open(csv_filename, 'w', newline='') as csvfile:
-            csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            for task in tasks:
-                completed = task.get('completed')
-                """Complete"""
-                title_task = task.get('title')
-                """Done"""
-                csv_writer.writerow(
-                            [user_id, user_name, completed, title_task])
-    else:
-        print("Usage: python3 1-export_to_CSV.py <employee_id>")
+    with open('{}.csv'.format(USER), 'w') as csvfile:
+        for task in tasks:
+            completed = task.get('completed')
+            """Complete"""
+            title_task = task.get('title')
+            """Done"""
+            csvfile.write('"{}","{}","{}","{}"\n'.format(
+                USER, user_name, completed, title_task))
