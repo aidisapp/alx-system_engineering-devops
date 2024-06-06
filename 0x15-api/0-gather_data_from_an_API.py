@@ -14,31 +14,33 @@ import sys
 
 def get_employee_todo_progress(employee_id):
     # Base URL for the JSONPlaceholder API
-    base_url = "https://jsonplaceholder.typicode.com"
+    base_url = "https://jsonplaceholder.typicode.com/"
 
     # Get user information
-    user_url = f"{base_url}/users/{employee_id}"
+    user_url = f"{base_url}users/{employee_id}"
     user_response = requests.get(user_url)
     user_data = user_response.json()
 
     # Get TODO list for the user
-    todos_url = f"{base_url}/todos?userId={employee_id}"
-    todos_response = requests.get(todos_url)
+    todos_url = f"{base_url}todos"
+    params = {"userId": employee_id}
+    todos_response = requests.get(todos_url, params=params)
     todos_data = todos_response.json()
 
     # Extracting employee name
-    employee_name = user_data['name']
+    employee_name = user_data.get('name')
 
     # Extracting TODO information
     total_tasks = len(todos_data)
-    completed_tasks = [task for task in todos_data if task['completed']]
-    number_of_done_tasks = len(completed_tasks)
+    completed_tasks = [task.get(
+                        "title") for task in todos_data if task.get(
+                                                                "completed")]
 
     # Display the TODO list progress
     print(f"Employee {employee_name} is done with tasks(
-                                    {number_of_done_tasks}/{total_tasks}): ")
+                            {len(completed_tasks)}/{total_tasks}): ")
     for task in completed_tasks:
-        print(f"\t {task['title']}")
+        print(f"\t {task}")
 
 
 if __name__ == "__main__":
