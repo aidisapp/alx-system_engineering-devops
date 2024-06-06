@@ -7,13 +7,12 @@ the associated user data and to-do list from the JSONPlaceholder API,
 and outputs the completed tasks for that employee.
 """
 
-
 import re
 import requests
 import sys
 
-
 REST_API = "https://jsonplaceholder.typicode.com"
+
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -33,13 +32,13 @@ if __name__ == '__main__':
 
             # Filter tasks for the specific employee
             tasks = list(filter(
-                        lambda x: x.get(
-                                'userId') == employee_id, todos_response))
+                            lambda x: x.get(
+                                    'userId') == employee_id, todos_response))
             completed_tasks = list(filter(lambda x: x.get('completed'), tasks))
 
             # Print the employee's name and the number of completed tasks
             print(f"Employee {employee_name} is done with tasks(
-                                    {len(completed_tasks)}/{len(tasks)}): ")
+                                {len(completed_tasks)}/{len(tasks)}): ")
 
             # Print each completed task
             if len(completed_tasks) > 0:
