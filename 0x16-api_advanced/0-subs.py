@@ -21,8 +21,7 @@ def number_of_subscribers(subreddit):
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {
-        "User-Agent": "linux: subreddit.subscriber.counter: v1.0.0 (
-                                            by / u/your_username)"
+        "User-Agent": "linux: subreddit.subscriber.counter: v1.0.0 (by /u/your_username)"
     }
     response = requests.get(url, headers=headers, allow_redirects=False)
 
