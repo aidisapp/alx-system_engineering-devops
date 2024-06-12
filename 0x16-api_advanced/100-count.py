@@ -7,8 +7,9 @@ import requests
 
 def count_words(subreddit, word_list, after=None, counts={}):
     """
-    This is a ecursive function that queries the Reddit API, parses the title of all
-        hot articles, and prints a sorted count of given keywords
+    This is a ecursive function that queries the Reddit API,
+    parses the title of all hot articles, and prints a sorted
+    count of given keywords
     """
     if not word_list or word_list == [] or not subreddit:
         return
@@ -35,7 +36,8 @@ def count_words(subreddit, word_list, after=None, counts={}):
         title = post["data"]["title"].lower()
         for word in word_list:
             if word.lower() in title:
-                counts[word] = counts.get(word, 0) + title.count(word.lower())
+                counts[word] = counts.get(
+                    word, 0) + title.count(word.lower())
 
     after = data["data"]["after"]
     if after:
